@@ -88,6 +88,48 @@ export async function registerRoutes(
     res.json(inquiries);
   });
 
+  // === Categories API ===
+  app.get("/api/categories", async (_req, res) => {
+    const categories = await storage.getCategories();
+    res.json(categories);
+  });
+
+  app.post("/api/categories", async (req, res) => {
+    if (!req.isAuthenticated()) return res.sendStatus(401);
+    try {
+      const { insertCategorySchema } = await import("@shared/schema");
+      const input = insertCategorySchema.parse(req.body);
+      const category = await storage.createCategory(input);
+      res.status(201).json(category);
+    } catch (err) {
+      if (err instanceof z.ZodError) {
+        return res.status(400).json({ message: err.errors[0].message });
+      }
+      throw err;
+    }
+  });
+
+  app.patch("/api/categories/:id", async (req, res) => {
+    if (!req.isAuthenticated()) return res.sendStatus(401);
+    try {
+      const { insertCategorySchema } = await import("@shared/schema");
+      const input = insertCategorySchema.partial().parse(req.body);
+      const category = await storage.updateCategory(Number(req.params.id), input);
+      res.json(category);
+    } catch (err) {
+      if (err instanceof z.ZodError) {
+        return res.status(400).json({ message: err.errors[0].message });
+      }
+      res.status(404).json({ message: "Category not found" });
+    }
+  });
+
+  app.delete("/api/categories/:id", async (req, res) => {
+    if (!req.isAuthenticated()) return res.sendStatus(401);
+    await storage.deleteCategory(Number(req.params.id));
+    res.sendStatus(204);
+  });
+
   // === Seed Data Endpoint (Optional, or run on startup) ===
   // seeding function
   await seedDatabase();

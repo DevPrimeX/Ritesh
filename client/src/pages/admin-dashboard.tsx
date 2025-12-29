@@ -7,14 +7,18 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Plus, Pencil, Trash2, Search, Loader2, Upload, X } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Switch } from "@/components/ui/switch";
+import { Plus, Pencil, Trash2, Search, Loader2, Upload, X, LayoutDashboard, Tag } from "lucide-react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { insertProductSchema, type Product } from "@shared/schema";
+import { insertProductSchema, insertCategorySchema, type Product, type Category } from "@shared/schema";
 import { z } from "zod";
 import { useDropzone } from "react-dropzone";
-
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { apiRequest, queryClient } from "@/lib/queryClient";
 import { useUpload } from "@/hooks/use-upload";
+import { useToast } from "@/hooks/use-toast";
 
 // Admin page needs to verify auth
 export default function AdminDashboard() {
@@ -30,15 +34,197 @@ export default function AdminDashboard() {
     <div className="min-h-screen bg-slate-50 pb-20">
       <div className="bg-white border-b py-8 mb-8">
         <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-bold font-display text-slate-900">PRODUCT MANAGEMENT</h1>
-          <p className="text-slate-500">Manage your catalog and specifications.</p>
+          <h1 className="text-3xl font-bold font-display text-slate-900 uppercase">Admin Dashboard</h1>
+          <p className="text-slate-500">Manage your catalog, categories, and homepage settings.</p>
         </div>
       </div>
       
       <div className="container mx-auto px-4">
-        <ProductManager />
+        <Tabs defaultValue="products" className="space-y-6">
+          <TabsList className="bg-white border p-1 h-auto">
+            <TabsTrigger value="products" className="flex items-center gap-2 py-2 px-4">
+              <LayoutDashboard className="h-4 w-4" />
+              Products
+            </TabsTrigger>
+            <TabsTrigger value="categories" className="flex items-center gap-2 py-2 px-4">
+              <Tag className="h-4 w-4" />
+              Categories & Home
+            </TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="products">
+            <ProductManager />
+          </TabsContent>
+
+          <TabsContent value="categories">
+            <CategoryManager />
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
+  );
+}
+
+function CategoryManager() {
+  const { data: categories, isLoading } = useQuery<Category[]>({ queryKey: ["/api/categories"] });
+  const [editingCategory, setEditingCategory] = useState<Category | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const { toast } = useToast();
+
+  const deleteMutation = useMutation({
+    mutationFn: async (id: number) => {
+      await apiRequest("DELETE", `/api/categories/${id}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/categories"] });
+      toast({ title: "Category deleted" });
+    }
+  });
+
+  const toggleHomeMutation = useMutation({
+    mutationFn: async ({ id, isHomePage }: { id: number, isHomePage: boolean }) => {
+      await apiRequest("PATCH", `/api/categories/${id}`, { isHomePage });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/categories"] });
+    }
+  });
+
+  return (
+    <div className="space-y-6">
+      <div className="flex justify-between items-center">
+        <h2 className="text-xl font-bold">Category Management</h2>
+        <Button onClick={() => { setEditingCategory(null); setIsDialogOpen(true); }}>
+          <Plus className="mr-2 h-4 w-4" /> Add Category
+        </Button>
+      </div>
+
+      <div className="bg-white rounded-lg border shadow-sm overflow-hidden">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Image</TableHead>
+              <TableHead>Name</TableHead>
+              <TableHead>Show on Home</TableHead>
+              <TableHead className="text-right">Actions</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {isLoading ? (
+               <TableRow><TableCell colSpan={4} className="text-center py-8">Loading...</TableCell></TableRow>
+            ) : categories?.map((cat) => (
+              <TableRow key={cat.id}>
+                <TableCell>
+                  <img src={cat.image || ""} className="w-12 h-12 rounded object-cover bg-slate-100" alt="thumb" />
+                </TableCell>
+                <TableCell className="font-medium">{cat.name}</TableCell>
+                <TableCell>
+                  <Switch 
+                    checked={!!cat.isHomePage} 
+                    onCheckedChange={(checked) => toggleHomeMutation.mutate({ id: cat.id, isHomePage: checked })} 
+                  />
+                </TableCell>
+                <TableCell className="text-right space-x-2">
+                  <Button variant="ghost" size="sm" onClick={() => { setEditingCategory(cat); setIsDialogOpen(true); }}>
+                    <Pencil className="h-4 w-4 text-blue-500" />
+                  </Button>
+                  <Button variant="ghost" size="sm" onClick={() => { if(confirm("Delete category?")) deleteMutation.mutate(cat.id); }}>
+                    <Trash2 className="h-4 w-4 text-red-500" />
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+
+      <CategoryDialog 
+        open={isDialogOpen} 
+        onOpenChange={setIsDialogOpen} 
+        category={editingCategory} 
+      />
+    </div>
+  );
+}
+
+function CategoryDialog({ open, onOpenChange, category }: { open: boolean, onOpenChange: (open: boolean) => void, category: Category | null }) {
+  const { uploadFile, isUploading } = useUpload();
+  const { toast } = useToast();
+  
+  const form = useForm({
+    resolver: zodResolver(insertCategorySchema),
+    defaultValues: { name: "", image: "", isHomePage: false }
+  });
+
+  useEffect(() => {
+    if (open) {
+      if (category) {
+        form.reset({ name: category.name, image: category.image || "", isHomePage: !!category.isHomePage });
+      } else {
+        form.reset({ name: "", image: "", isHomePage: false });
+      }
+    }
+  }, [open, category, form]);
+
+  const mutation = useMutation({
+    mutationFn: async (data: any) => {
+      if (category) {
+        await apiRequest("PATCH", `/api/categories/${category.id}`, data);
+      } else {
+        await apiRequest("POST", "/api/categories", data);
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/categories"] });
+      onOpenChange(false);
+      toast({ title: category ? "Category updated" : "Category created" });
+    }
+  });
+
+  const onDrop = useCallback(async (acceptedFiles: File[]) => {
+    if (acceptedFiles[0]) {
+      const response = await uploadFile(acceptedFiles[0]);
+      if (response) {
+        form.setValue("image", window.location.origin + response.objectPath);
+      }
+    }
+  }, [form, uploadFile]);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, accept: { 'image/*': [] }, multiple: false });
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent>
+        <DialogHeader><DialogTitle>{category ? "Edit Category" : "Add Category"}</DialogTitle></DialogHeader>
+        <form onSubmit={form.handleSubmit((data) => mutation.mutate(data))} className="space-y-4">
+          <div className="space-y-2">
+            <Label>Name</Label>
+            <Input {...form.register("name")} />
+          </div>
+          <div className="space-y-2">
+            <Label>Image</Label>
+            <div {...getRootProps()} className="border-2 border-dashed rounded-lg p-4 text-center cursor-pointer">
+              <input {...getInputProps()} />
+              {form.watch("image") ? (
+                <img src={form.watch("image")} className="h-32 mx-auto rounded object-cover" />
+              ) : (
+                <Upload className="mx-auto h-8 w-8 text-slate-400" />
+              )}
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <Switch 
+              checked={form.watch("isHomePage")} 
+              onCheckedChange={(v) => form.setValue("isHomePage", v)} 
+            />
+            <Label>Show on Homepage</Label>
+          </div>
+          <Button type="submit" className="w-full" disabled={mutation.isPending || isUploading}>
+            {mutation.isPending || isUploading ? <Loader2 className="animate-spin" /> : "Save"}
+          </Button>
+        </form>
+      </DialogContent>
+    </Dialog>
   );
 }
 
