@@ -167,6 +167,23 @@ async function seedDatabase() {
       whatsappEnabled: true
     });
 
+    // Seed initial categories
+    await storage.createCategory({
+      name: "Measuring Cups",
+      image: "https://placehold.co/600x800?text=Measuring+Cups",
+      isHomePage: true
+    });
+    await storage.createCategory({
+      name: "Foils",
+      image: "https://placehold.co/600x800?text=Foils",
+      isHomePage: true
+    });
+    await storage.createCategory({
+      name: "Trays",
+      image: "https://placehold.co/600x800?text=Trays",
+      isHomePage: true
+    });
+
     await storage.createProduct({
       name: "Aluminum Blister Foil",
       category: "Foils",

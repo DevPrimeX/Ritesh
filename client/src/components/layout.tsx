@@ -14,9 +14,9 @@ export function Navbar() {
     <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center space-x-2">
-          <Package className="h-8 w-8 text-primary" />
-          <span className="font-display text-2xl font-bold tracking-tight text-slate-900">
-            INDUSTRIA<span className="text-primary">PACK</span>
+          <img src="/attached_assets/1766999250275_1767010405626.jpg" alt="Ritesh Plastic Logo" className="h-10 w-auto" />
+          <span className="font-display text-2xl font-bold tracking-tight text-slate-900 uppercase">
+            Ritesh <span className="text-primary">Plastic</span>
           </span>
         </Link>
 
@@ -85,13 +85,13 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <Package className="h-8 w-8 text-primary" />
-              <span className="font-display text-2xl font-bold tracking-tight text-white">
-                INDUSTRIA<span className="text-primary">PACK</span>
+              <img src="/attached_assets/1766999250275_1767010405626.jpg" alt="Ritesh Plastic Logo" className="h-10 w-auto brightness-0 invert" />
+              <span className="font-display text-2xl font-bold tracking-tight text-white uppercase">
+                Ritesh <span className="text-primary">Plastic</span>
               </span>
             </div>
             <p className="text-sm text-slate-400">
-              Leading manufacturer of premium food packaging solutions. Quality you can trust, delivered with excellence.
+              Leading manufacturer of high-quality, durable, and sustainable products for the pharmaceutical industry.
             </p>
           </div>
           
@@ -123,7 +123,7 @@ export function Footer() {
         </div>
         
         <div className="border-t border-slate-800 mt-12 pt-8 text-center text-sm text-slate-500">
-          © {new Date().getFullYear()} IndustriaPack. All rights reserved.
+          © {new Date().getFullYear()} Ritesh Plastic. All rights reserved.
         </div>
       </div>
     </footer>
