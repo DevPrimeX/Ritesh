@@ -68,7 +68,7 @@ export default function HomePage() {
         <div className="absolute inset-0 z-0" ref={emblaRef}>
           <div className="flex h-full">
             <div className="flex-[0_0_100%] min-w-0 relative">
-               <img src="/attached_assets/1766999250275_1767010405626.jpg" className="w-full h-full object-contain opacity-20 p-20" alt="Logo BG" />
+               <img src="https://images.unsplash.com/photo-1530124560677-bdaea92ca45e?q=80&w=2070&auto=format&fit=crop" className="w-full h-full object-cover opacity-30" alt="Industrial Manufacturing" />
             </div>
             <div className="flex-[0_0_100%] min-w-0 relative">
                {/* HTML Comment: Product Quality Close-up */}

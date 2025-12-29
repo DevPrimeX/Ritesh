@@ -14,7 +14,6 @@ export function Navbar() {
     <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center space-x-2">
-          <img src="/attached_assets/1766999250275_1767010405626.jpg" alt="Ritesh Plastic Logo" className="h-10 w-auto" />
           <span className="font-display text-2xl font-bold tracking-tight text-slate-900 uppercase">
             Ritesh <span className="text-primary">Plastic</span>
           </span>
@@ -85,7 +84,6 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <img src="/attached_assets/1766999250275_1767010405626.jpg" alt="Ritesh Plastic Logo" className="h-10 w-auto brightness-0 invert" />
               <span className="font-display text-2xl font-bold tracking-tight text-white uppercase">
                 Ritesh <span className="text-primary">Plastic</span>
               </span>
@@ -116,8 +114,8 @@ export function Footer() {
           <div>
             <h4 className="text-white text-lg mb-4">Contact</h4>
             <ul className="space-y-2 text-sm">
-              <li className="flex items-center"><Phone className="h-4 w-4 mr-2 text-primary" /> +91 98765 43210</li>
-              <li className="mt-2">123 Industrial Area, Phase 1<br/>New Delhi, India 110020</li>
+              <li className="flex items-center"><Phone className="h-4 w-4 mr-2 text-primary" /> +91 98822 82826</li>
+              <li className="mt-2 text-slate-400">Industrial Area Lodhimajra, Baddi<br/>Himachal Pradesh, India</li>
             </ul>
           </div>
         </div>
