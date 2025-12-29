@@ -56,49 +56,54 @@ function CategoryList() {
 
 export default function HomePage() {
   const { data: featuredProducts, isLoading } = useProducts({ search: "" });
-  const [emblaRef] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 5000 })]);
+  const [emblaRef] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 6000 })]);
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-[600px] overflow-hidden bg-slate-900 text-white">
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-900 to-slate-900/40 z-10" />
+      <section className="relative h-[85vh] min-h-[600px] overflow-hidden bg-slate-950 text-white flex items-center">
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-950/80 to-transparent z-10" />
         
         {/* Background Image Slider */}
         <div className="absolute inset-0 z-0" ref={emblaRef}>
           <div className="flex h-full">
             <div className="flex-[0_0_100%] min-w-0 relative">
-               <img src="https://images.unsplash.com/photo-1530124560677-bdaea92ca45e?q=80&w=2070&auto=format&fit=crop" className="w-full h-full object-cover opacity-30" alt="Industrial Manufacturing" />
+               <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop" className="w-full h-full object-cover opacity-40 scale-105" alt="Industrial Manufacturing" />
             </div>
             <div className="flex-[0_0_100%] min-w-0 relative">
-               {/* HTML Comment: Product Quality Close-up */}
-               <img src="https://images.unsplash.com/photo-1626176395349-8e50b16f195d?q=80&w=2070&auto=format&fit=crop" className="w-full h-full object-cover opacity-50" alt="Packaging" />
+               <img src="https://images.unsplash.com/photo-1565106430482-8f6e74349ca1?q=80&w=2070&auto=format&fit=crop" className="w-full h-full object-cover opacity-40" alt="Precision Engineering" />
             </div>
           </div>
         </div>
 
-        <div className="relative z-20 container mx-auto px-4 h-full flex flex-col justify-center">
+        <div className="relative z-20 container mx-auto px-6 h-full flex items-center">
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-2xl"
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="max-w-3xl"
           >
-            <h1 className="text-5xl md:text-7xl font-display font-bold mb-6 leading-tight uppercase">
-              Ritesh <span className="text-primary">Plastic</span>
+            <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold tracking-widest uppercase mb-6">
+              Industrial Excellence
+            </div>
+            <h1 className="text-6xl md:text-8xl font-sans font-black mb-6 leading-[0.9] tracking-tighter uppercase">
+              The Future of <br/>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-400">
+                Packaging
+              </span>
             </h1>
-            <p className="text-xl md:text-2xl text-slate-300 mb-8 font-light">
-              We manufacture high-quality, durable, and sustainable product for the pharmaceutical industry.
+            <p className="text-xl md:text-2xl text-slate-300 mb-10 max-w-xl font-medium leading-relaxed">
+              Premium manufacturing of high-performance, sustainable plastic solutions for global pharmaceutical leaders.
             </p>
-            <div className="flex gap-4">
+            <div className="flex flex-wrap gap-5">
               <Link href="/products">
-                <Button size="lg" className="bg-primary hover:bg-primary/90 text-lg px-8 h-14 rounded-none">
-                  Explore Products <ArrowRight className="ml-2" />
+                <Button size="lg" className="bg-primary hover:bg-primary/90 text-lg px-10 h-16 rounded-2xl shadow-2xl shadow-primary/20 transition-all hover:scale-105 active:scale-95 font-bold">
+                  Explore Catalog <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
               <Link href="/contact">
-                <Button size="lg" variant="outline" className="text-white border-white hover:bg-white hover:text-slate-900 text-lg px-8 h-14 rounded-none">
-                  Contact Sales
+                <Button size="lg" variant="outline" className="text-white border-white/20 bg-white/5 backdrop-blur-md hover:bg-white hover:text-slate-950 text-lg px-10 h-16 rounded-2xl transition-all hover:scale-105 active:scale-95 font-bold">
+                  Custom Quote
                 </Button>
               </Link>
             </div>
