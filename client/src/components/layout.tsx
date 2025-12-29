@@ -11,11 +11,11 @@ export function Navbar() {
   const isAdmin = location.startsWith("/admin");
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-xl supports-[backdrop-filter]:bg-white/60">
+    <header className="sticky top-0 z-50 w-full border-b bg-white shadow-sm">
       <div className="container mx-auto px-6 h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center space-x-2 group">
-          <span className="font-sans text-2xl font-black tracking-tighter text-slate-900 uppercase group-hover:text-primary transition-colors">
-            Ritesh <span className="text-primary group-hover:text-slate-900 transition-colors">Plastic</span>
+          <span className="font-sans text-2xl font-black tracking-tighter text-slate-950 uppercase group-hover:text-primary transition-colors">
+            Ritesh <span className="text-primary group-hover:text-slate-950 transition-colors">Plastic</span>
           </span>
         </Link>
 

@@ -42,13 +42,13 @@ function CategoryList() {
               alt={cat.name}
               className="w-full h-full object-cover opacity-60 group-hover:opacity-40 group-hover:scale-110 transition-all duration-1000"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent opacity-90" />
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 md:p-8 text-center">
-              <div className="h-px w-8 md:w-12 bg-primary mb-4 md:mb-6 group-hover:w-16 md:group-hover:w-24 transition-all duration-500" />
-              <h3 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tighter leading-none mb-2 md:mb-4 transform group-hover:-translate-y-2 transition-transform duration-500 drop-shadow-lg">
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent opacity-95" />
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 md:p-8 text-center z-20">
+              <div className="h-px w-8 md:w-12 bg-primary mb-4 md:mb-6 group-hover:w-16 md:group-hover:w-24 transition-all duration-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]" />
+              <h3 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tighter leading-none mb-2 md:mb-4 transform group-hover:-translate-y-2 transition-transform duration-500 [text-shadow:0_2px_10px_rgba(0,0,0,0.8)]">
                 {cat.name}
               </h3>
-              <div className="text-primary text-[10px] md:text-sm font-bold tracking-[0.2em] uppercase opacity-100 md:opacity-0 group-hover:opacity-100 transform translate-y-0 md:translate-y-4 group-hover:translate-y-0 transition-all duration-500 drop-shadow-md">
+              <div className="text-primary text-[10px] md:text-sm font-bold tracking-[0.2em] uppercase opacity-100 transform translate-y-0 group-hover:translate-y-0 transition-all duration-500 [text-shadow:0_1px_5px_rgba(0,0,0,0.5)]">
                 View Collection
               </div>
             </div>
