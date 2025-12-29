@@ -5,20 +5,20 @@
 @tailwind utilities;
 
 :root {
-  /* Modern Industrial Palette */
+  /* High Contrast Modern Industrial Palette */
   --font-sans: 'Inter', sans-serif;
   --font-display: 'Inter', sans-serif;
 
-  --background: 210 20% 98%;
-  --foreground: 224 71% 4%;
+  --background: 0 0% 100%;
+  --foreground: 224 71.4% 4.1%;
 
   --card: 0 0% 100%;
-  --card-foreground: 224 71% 4%;
+  --card-foreground: 224 71.4% 4.1%;
 
   --popover: 0 0% 100%;
-  --popover-foreground: 224 71% 4%;
+  --popover-foreground: 224 71.4% 4.1%;
 
-  --primary: 221.2 83.2% 53.3%; /* Modern Blue */
+  --primary: 221.2 83.2% 53.3%;
   --primary-foreground: 210 40% 98%;
 
   --secondary: 210 40% 96.1%;
