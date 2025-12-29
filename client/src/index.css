@@ -5,39 +5,39 @@
 @tailwind utilities;
 
 :root {
-  /* Industrial Blue & Clean Grays Palette */
+  /* Modern Industrial Palette */
   --font-sans: 'Inter', sans-serif;
-  --font-display: 'Oswald', sans-serif;
+  --font-display: 'Inter', sans-serif;
 
-  --background: 210 20% 99%;
-  --foreground: 215 25% 27%;
+  --background: 210 20% 98%;
+  --foreground: 224 71% 4%;
 
   --card: 0 0% 100%;
-  --card-foreground: 215 25% 27%;
+  --card-foreground: 224 71% 4%;
 
   --popover: 0 0% 100%;
-  --popover-foreground: 215 25% 27%;
+  --popover-foreground: 224 71% 4%;
 
-  --primary: 204 80% 48%; /* #1890FF equivalent - Industrial Blue */
-  --primary-foreground: 0 0% 100%;
+  --primary: 221.2 83.2% 53.3%; /* Modern Blue */
+  --primary-foreground: 210 40% 98%;
 
-  --secondary: 210 20% 96%;
-  --secondary-foreground: 215 25% 27%;
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
 
-  --muted: 210 20% 96%;
-  --muted-foreground: 215 16% 47%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
 
-  --accent: 204 80% 96%;
-  --accent-foreground: 204 80% 48%;
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
 
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 0 0% 98%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
 
-  --border: 214 32% 91%;
-  --input: 214 32% 91%;
-  --ring: 204 80% 48%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 221.2 83.2% 53.3%;
 
-  --radius: 0.5rem;
+  --radius: 0.75rem;
 }
 
 @layer base {
