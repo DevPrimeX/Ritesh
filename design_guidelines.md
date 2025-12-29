@@ -1,151 +1,144 @@
-# Industrial Wholesale Catalog - Design Guidelines
+# Industrial Packaging Catalog - Modern Design Guidelines
 
 ## Design Approach
-**Reference-Based Hybrid:** Drawing from elevated B2B platforms (Alibaba Business, Grainger, ThomasNet) combined with Material Design principles for data-heavy sections. Prioritize trust signals, efficient product discovery, and professional aesthetics.
+**Material Design meets Industrial Chic:** Combining Material Design's sophisticated elevation system and motion principles with Stripe's minimalist restraint and Linear's typography excellence. Elevated B2B aesthetic that breaks from traditional catalog conventions.
 
 ## Core Design Principles
-1. **Professional Credibility:** Clean, structured layouts with ample whitespace
-2. **Visual Hierarchy:** Clear distinction between product imagery and specifications
-3. **Trust Building:** Prominent placement of certifications, quality badges, delivery guarantees
-4. **Efficient Navigation:** Multi-level categorization with persistent filters
+1. **Industrial Sophistication:** Gradient-enhanced depth with refined shadows
+2. **Modern Minimalism:** Generous negative space, bold typography hierarchy
+3. **Trust Through Polish:** Premium materials, subtle motion, professional imagery
+4. **Effortless Discovery:** Intelligent filtering with instant visual feedback
 
 ---
 
 ## Typography
-- **Primary Font:** Inter or Roboto (professional, readable at all sizes)
-- **Headings:** 600-700 weight, tight letter-spacing for impact
-- **Product Titles:** 500 weight, 18-20px
-- **Specs/Pricing:** 400 weight, 14-16px, tabular numbers for alignment
-- **Body Text:** 400 weight, 16px, 1.6 line-height
+- **Primary Font:** Inter (600-700 for headings, 400-500 for body)
+- **Display Headings:** 700 weight, 48-64px, tight tracking (-0.02em)
+- **Section Titles:** 600 weight, 32-40px
+- **Product Names:** 500 weight, 20px, regular tracking
+- **Body/Specs:** 400 weight, 16px, 1.6 line-height
+- **Numerical Data:** Tabular figures enabled for pricing/specs
 
 ## Layout System
-**Spacing Primitives:** Tailwind units 4, 6, 8, 12, 16, 24 (p-4, gap-6, py-12, etc.)
-**Grid Structure:** 12-column responsive grid
-**Containers:** max-w-7xl for main content, max-w-6xl for product grids
+**Spacing Primitives:** Tailwind units 6, 8, 12, 16, 20, 24
+**Containers:** max-w-7xl with px-6 for breathing room
+**Vertical Rhythm:** py-16 to py-24 for sections
 
 ---
 
 ## Component Library
 
-### Navigation
-**Primary Header:**
-- Logo left, search bar center (prominent, 50% width on desktop)
-- Account/cart icons right
-- Secondary navigation below: Categories, Bulk Orders, Certifications, Delivery, Contact
+### Navigation Header
+**Glass-morphism sticky header** with subtle backdrop blur:
+- Logo left (modern wordmark treatment)
+- Center: Prominent search bar (60% width, gradient border on focus, rounded-2xl)
+- Right: Quote Request CTA (gradient button), Account icon, Cart (with badge)
+- Below: Horizontal category pills with icon + label, smooth scroll indicator
 
-**Category Mega Menu:**
-- Multi-level dropdown with images for main categories
-- Quick filters visible on hover
+### Hero Section (90vh)
+**Immersive full-screen hero** with diagonal gradient overlay (deep blue to transparent):
+- **Background:** High-resolution industrial packaging facility image showing modern warehouse automation
+- **Content Grid (2-column on desktop, left 55%, right 45%):**
+  - Left: Large display heading + compelling subheading emphasizing innovation
+  - Dual CTAs: Primary "Explore Catalog" + Secondary "Request Custom Quote" (both with blurred glass backgrounds)
+  - Below CTAs: Inline trust metrics (e.g., "15,000+ Products • Same-Day Shipping • ISO Certified")
+- Right: Floating stats cards with gradient borders showing live inventory count, active customers, delivery speed
+- Bottom: Animated scroll indicator
 
-### Hero Section
-**Full-width hero (70vh)** with high-quality industrial environment photography showing:
-- Warehouse/manufacturing setting OR product usage in professional context
-- Overlay gradient (dark bottom fade) for text legibility
-- **Hero Content (left-aligned, bottom-third):**
-  - Large headline: "Premium Industrial Supplies" 
-  - Subheading highlighting key values: "Wholesale Pricing • Fast Delivery • Certified Quality"
-  - Two CTAs with blurred backgrounds: Primary "Browse Catalog", Secondary "Request Quote"
-  - Trust badges strip below CTAs: ISO certified, Fast shipping icon, Secure payment
+### Category Showcase Section
+**3-column grid** (lg:grid-cols-3) below hero:
+- Large category cards with hover lift effect
+- Background gradient overlay on category images
+- Icon + category name + product count
+- Smooth transition to vibrant accent gradient border on hover
 
-### Product Grid Section
-**4-column desktop (lg:grid-cols-4), 2-column tablet, 1-column mobile**
+### Product Grid
+**4-column desktop** (lg:grid-cols-4), responsive collapse:
+**Enhanced Product Cards:**
+- 4:3 aspect ratio image with subtle gradient overlay bottom
+- Floating badge top-right (Stock Status with colored dot)
+- Product name (truncate 2 lines)
+- SKU in muted text
+- **Pricing Display:** Gradient card showing tiered pricing (1-99 | 100-499 | 500+) with "Best Value" highlight
+- Micro-interaction: Card lifts with gradient shadow on hover
+- Add to Cart button full-width with gradient background
 
-**Product Card Structure:**
-- Square product image (1:1 ratio) with subtle border
-- Category tag (top-left overlay on image)
-- Product title (2-line truncate)
-- SKU number (small, muted text)
-- Price display: Bulk pricing tiers (1-99, 100-499, 500+)
-- Stock status badge (In Stock/Low Stock with color coding)
-- Quick view icon on hover
-- Add to cart button (full-width at bottom)
+### Filter Experience
+**Sticky left sidebar (280px desktop):**
+- Collapsible accordion sections with smooth animations
+- Multi-select with gradient checkboxes
+- Price range slider with gradient fill
+- Active filter chips at top with dismiss icons
+- "Clear All" link with counter badge
 
-### Filter Sidebar (Desktop Left Column)
-**Sticky positioning, 25% width:**
-- Category tree (collapsible)
-- Price range slider
-- Stock availability toggles
-- Certifications checkboxes
-- Manufacturer multi-select
-- Clear all filters button
+### Product Detail Layout
+**Asymmetric 65/35 split:**
 
-### Trust Elements Section
-**3-column grid below hero:**
-- Certified Quality (badge icon + text)
-- Fast Delivery (truck icon + "2-3 Day Shipping")
-- Wholesale Pricing (discount icon + volume pricing info)
+Left Column:
+- Main image viewer with gradient border frame
+- 5-thumbnail carousel below with gradient hover states
+- Zoom modal on click
 
-### Product Detail Page
-**Two-column layout (60/40 split):**
+Right Column:
+- Breadcrumb navigation
+- Large product title + certification badges inline
+- **Gradient-enhanced pricing table** with tier highlights
+- Quantity selector with increment buttons
+- Dual action buttons (Add to Cart gradient, Request Quote outlined)
+- Expandable spec sections (smooth accordion)
+- Delivery calculator with estimated date display
+- Related products horizontal scroll (6 cards)
 
-**Left:** 
-- Large image gallery (main image + 4-5 thumbnails below)
-- Zoom on hover functionality
+### Trust Signals Bar
+**Full-width section** with 4-column grid:
+- Icon + Headline + Description for each (ISO Certification, Express Delivery, Volume Discounts, Secure Payments)
+- Gradient accent dividers between columns
+- Subtle hover lift on each card
 
-**Right:**
-- Product title (large)
-- SKU, Category breadcrumb
-- Certification badges row
-- Pricing table (tiered structure, highlighted savings)
-- Quantity selector with min order quantity
-- Add to cart + Request quote buttons
-- Specifications table (collapsible sections)
-- Delivery estimate calculator
-- Related products carousel below
-
-### Admin Dashboard (Separate Design Context)
-**Sidebar Navigation (left, 240px):**
-- Logo top
-- Dashboard, Products, Orders, Analytics, Settings menu items
-- Compact, icon + label format
-
-**Main Content Area:**
-- Stats cards (4-column): Total Orders, Revenue, Active Products, Pending Orders
-- Data tables with sorting, filtering, pagination
-- Chart widgets (line graphs for sales trends)
-- Action buttons consistently top-right of sections
+### Features Section
+**2-column layout** alternating image/content placement:
+- High-quality industrial imagery (packaging line automation, quality control, warehouse efficiency)
+- Each row showcases a key value proposition with supporting visuals
+- Gradient text highlights for key metrics
 
 ### Footer
-**4-column layout:**
-- Company info + contact
-- Product categories quick links
-- Customer service (returns, shipping, FAQ)
-- Certifications display + payment methods
+**4-column grid** with gradient top border:
+- Company info with modern logo treatment
+- Quick links (Products, Services, Resources)
+- Contact information with interactive elements
+- Newsletter signup with gradient input focus state
+- Bottom bar: Payment badges + social icons + certifications
 
 ---
 
-## Images Section
+## Images
 
 **Hero Image:**
-- **Type:** Professional industrial warehouse or manufacturing floor
-- **Treatment:** Wide-angle shot, bright lighting, organized environment conveying professionalism
-- **Dimensions:** 1920x1080 minimum, landscape orientation
-- **Placement:** Full-width background, dark gradient overlay bottom 40%
+- Modern industrial packaging facility with automated systems, bright lighting, clean organized environment
+- Wide-angle perspective showing scale and professionalism
+- 1920x1080 minimum, diagonal gradient overlay (deep blue 70% to transparent)
+
+**Category Images:**
+- Clean product photography on neutral backgrounds with soft shadows
+- Lifestyle shots showing products in professional use contexts
+
+**Feature Section Images:**
+- High-res industrial photography: automated packaging lines, quality inspection, logistics operations
+- Emphasize technology, precision, and modern manufacturing
 
 **Product Images:**
-- **Style:** Clean white/neutral backgrounds, consistent lighting
-- **Angles:** Multiple views per product (front, side, detail shots)
-- **Quality:** High-resolution, sharp focus on product details
-
-**Category Section Images:**
-- **Usage:** Header images for category landing pages
-- **Style:** Environmental shots showing products in use/context
-- **Treatment:** Subtle overlays for text readability
-
-**Trust/Certification Graphics:**
-- ISO logos, industry certifications, payment security badges
-- Delivery partner logos
-- Quality guarantee seals
+- Multiple angles on pure white background
+- Consistent lighting and perspective
+- Detail shots for material quality/construction
 
 ---
 
-## Animations
-**Minimal, purposeful only:**
-- Product card lift on hover (subtle shadow increase)
-- Filter sidebar smooth expand/collapse
-- Cart icon bounce on item add
-- Loading states for data-heavy operations (dashboard)
+## Micro-Interactions
+- Gradient border animation on search focus
+- Card lift with gradient shadow on hover (transform + shadow transition)
+- Smooth accordion expand/collapse (height transition)
+- Cart icon bounce + count badge animation on add
+- Filter checkbox gradient fill animation
+- Loading states with gradient skeleton screens
 
----
-
-**Design Distinction:** This avoids generic e-commerce patterns by emphasizing B2B-specific needs: bulk pricing prominence, certification trust signals, technical specifications accessibility, and professional industrial imagery over lifestyle photography.
+**Visual Distinction:** This design breaks B2B catalog conventions through sophisticated gradient treatments, generous spacing, premium typography, and polished micro-interactions while maintaining essential wholesale functionality. The aesthetic communicates modern industrial excellence rather than traditional catalog utility.
