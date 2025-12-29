@@ -33,22 +33,22 @@ function CategoryList() {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
       {displayCategories.map((cat) => (
         <Link key={cat.id} href={`/products?category=${cat.name}`}>
-          <div className="group relative h-[450px] overflow-hidden cursor-pointer bg-slate-900 rounded-3xl border border-white/10 shadow-2xl transition-all duration-700 hover:scale-[1.02]">
+          <div className="group relative h-[300px] md:h-[450px] overflow-hidden cursor-pointer bg-slate-900 rounded-2xl md:rounded-3xl border border-white/10 shadow-2xl transition-all duration-700 hover:scale-[1.02]">
             <img 
               src={cat.image || `https://placehold.co/600x800/1e293b/ffffff?text=${cat.name}`} 
               alt={cat.name}
               className="w-full h-full object-cover opacity-60 group-hover:opacity-40 group-hover:scale-110 transition-all duration-1000"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80" />
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
-              <div className="h-px w-12 bg-primary mb-6 group-hover:w-24 transition-all duration-500" />
-              <h3 className="text-4xl font-black text-white uppercase tracking-tighter leading-none mb-4 transform group-hover:-translate-y-2 transition-transform duration-500">
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent opacity-90" />
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 md:p-8 text-center">
+              <div className="h-px w-8 md:w-12 bg-primary mb-4 md:mb-6 group-hover:w-16 md:group-hover:w-24 transition-all duration-500" />
+              <h3 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tighter leading-none mb-2 md:mb-4 transform group-hover:-translate-y-2 transition-transform duration-500 drop-shadow-lg">
                 {cat.name}
               </h3>
-              <div className="text-primary text-sm font-bold tracking-[0.2em] uppercase opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+              <div className="text-primary text-[10px] md:text-sm font-bold tracking-[0.2em] uppercase opacity-100 md:opacity-0 group-hover:opacity-100 transform translate-y-0 md:translate-y-4 group-hover:translate-y-0 transition-all duration-500 drop-shadow-md">
                 View Collection
               </div>
             </div>
@@ -91,23 +91,23 @@ export default function HomePage() {
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold tracking-widest uppercase mb-6">
               Industrial Excellence
             </div>
-            <h1 className="text-6xl md:text-8xl font-sans font-black mb-6 leading-[0.9] tracking-tighter uppercase">
+            <h1 className="text-4xl sm:text-6xl md:text-8xl font-sans font-black mb-4 md:mb-6 leading-[0.9] tracking-tighter uppercase">
               The Future of <br/>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-400">
                 Packaging
               </span>
             </h1>
-            <p className="text-xl md:text-2xl text-slate-300 mb-10 max-w-xl font-medium leading-relaxed">
+            <p className="text-lg md:text-2xl text-slate-300 mb-8 md:mb-10 max-w-xl font-medium leading-relaxed">
               Premium manufacturing of high-performance, sustainable plastic solutions for global pharmaceutical leaders.
             </p>
-            <div className="flex flex-wrap gap-5">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-4 md:gap-5">
               <Link href="/products">
-                <Button size="lg" className="bg-primary hover:bg-primary/90 text-lg px-10 h-16 rounded-2xl shadow-2xl shadow-primary/20 transition-all hover:scale-105 active:scale-95 font-bold">
+                <Button size="lg" className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-base md:text-lg px-8 md:px-10 h-14 md:h-16 rounded-xl md:rounded-2xl shadow-2xl shadow-primary/20 transition-all hover:scale-105 active:scale-95 font-bold">
                   Explore Catalog <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
               <Link href="/contact">
-                <Button size="lg" variant="outline" className="text-white border-white/20 bg-white/5 backdrop-blur-md hover:bg-white hover:text-slate-950 text-lg px-10 h-16 rounded-2xl transition-all hover:scale-105 active:scale-95 font-bold">
+                <Button size="lg" variant="outline" className="w-full sm:w-auto text-white border-white/20 bg-white/5 backdrop-blur-md hover:bg-white hover:text-slate-950 text-base md:text-lg px-8 md:px-10 h-14 md:h-16 rounded-xl md:rounded-2xl transition-all hover:scale-105 active:scale-95 font-bold">
                   Custom Quote
                 </Button>
               </Link>
