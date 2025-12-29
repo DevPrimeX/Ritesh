@@ -3,9 +3,56 @@ import { motion } from "framer-motion";
 import { useProducts } from "@/hooks/use-products";
 import { ProductCard } from "@/components/product-card";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ShieldCheck, Truck, ThumbsUp } from "lucide-react";
+import { ArrowRight, ShieldCheck, Truck, ThumbsUp, Loader2 } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
+import { useQuery } from "@tanstack/react-query";
+import { type Category } from "@shared/schema";
+
+function CategoryList() {
+  const { data: categories, isLoading } = useQuery<Category[]>({ 
+    queryKey: ["/api/categories"] 
+  });
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center py-12">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  const displayCategories = categories?.filter(c => c.isHomePage) || [];
+
+  if (displayCategories.length === 0) {
+    return (
+      <div className="text-center text-slate-500 py-12">
+        No categories selected for homepage.
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      {displayCategories.map((cat) => (
+        <Link key={cat.id} href={`/products?category=${cat.name}`}>
+          <div className="group relative h-80 overflow-hidden cursor-pointer bg-slate-900 rounded-md">
+            <img 
+              src={cat.image || `https://placehold.co/600x800/1e293b/ffffff?text=${cat.name}`} 
+              alt={cat.name}
+              className="w-full h-full object-cover opacity-70 group-hover:scale-110 transition-transform duration-700"
+            />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <h3 className="text-3xl font-bold text-white border-4 border-white px-6 py-3 uppercase tracking-widest group-hover:bg-white group-hover:text-slate-900 transition-colors">
+                {cat.name}
+              </h3>
+            </div>
+          </div>
+        </Link>
+      ))}
+    </div>
+  );
+}
 
 export default function HomePage() {
   const { data: featuredProducts, isLoading } = useProducts({ search: "" });
@@ -21,8 +68,7 @@ export default function HomePage() {
         <div className="absolute inset-0 z-0" ref={emblaRef}>
           <div className="flex h-full">
             <div className="flex-[0_0_100%] min-w-0 relative">
-               {/* HTML Comment: Industrial Warehouse Background */}
-               <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070&auto=format&fit=crop" className="w-full h-full object-cover opacity-50" alt="Factory" />
+               <img src="/attached_assets/1766999250275_1767010405626.jpg" className="w-full h-full object-contain opacity-20 p-20" alt="Logo BG" />
             </div>
             <div className="flex-[0_0_100%] min-w-0 relative">
                {/* HTML Comment: Product Quality Close-up */}
@@ -38,11 +84,11 @@ export default function HomePage() {
             transition={{ duration: 0.8 }}
             className="max-w-2xl"
           >
-            <h1 className="text-5xl md:text-7xl font-display font-bold mb-6 leading-tight">
-              PREMIUM PACKAGING <span className="text-primary">SOLUTIONS</span>
+            <h1 className="text-5xl md:text-7xl font-display font-bold mb-6 leading-tight uppercase">
+              Ritesh <span className="text-primary">Plastic</span>
             </h1>
             <p className="text-xl md:text-2xl text-slate-300 mb-8 font-light">
-              We manufacture high-quality, durable, and sustainable packaging for the food industry.
+              We manufacture high-quality, durable, and sustainable product for the pharmaceutical industry.
             </p>
             <div className="flex gap-4">
               <Link href="/products">
@@ -93,28 +139,11 @@ export default function HomePage() {
       <section className="py-24 bg-slate-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 text-slate-900">OUR CATEGORIES</h2>
+            <h2 className="text-4xl font-bold mb-4 text-slate-900 uppercase">Our Categories</h2>
             <div className="h-1 w-20 bg-primary mx-auto" />
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {['Containers', 'Trays', 'Foils'].map((cat) => (
-              <Link key={cat} href={`/products?category=${cat}`}>
-                <div className="group relative h-80 overflow-hidden cursor-pointer bg-slate-900">
-                  <img 
-                    src={`https://placehold.co/600x800/1e293b/ffffff?text=${cat}`} 
-                    alt={cat}
-                    className="w-full h-full object-cover opacity-70 group-hover:scale-110 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <h3 className="text-3xl font-bold text-white border-4 border-white px-6 py-3 uppercase tracking-widest group-hover:bg-white group-hover:text-slate-900 transition-colors">
-                      {cat}
-                    </h3>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
+          <CategoryList />
         </div>
       </section>
 
