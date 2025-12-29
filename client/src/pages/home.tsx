@@ -16,8 +16,8 @@ function CategoryList() {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center py-12">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      <div className="flex justify-center py-20">
+        <Loader2 className="h-12 w-12 animate-spin text-primary" />
       </div>
     );
   }
@@ -26,26 +26,31 @@ function CategoryList() {
 
   if (displayCategories.length === 0) {
     return (
-      <div className="text-center text-slate-500 py-12">
+      <div className="text-center text-slate-500 py-20 font-bold uppercase tracking-widest bg-white/5 rounded-3xl border border-white/10">
         No categories selected for homepage.
       </div>
     );
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
       {displayCategories.map((cat) => (
         <Link key={cat.id} href={`/products?category=${cat.name}`}>
-          <div className="group relative h-80 overflow-hidden cursor-pointer bg-slate-900 rounded-md">
+          <div className="group relative h-[450px] overflow-hidden cursor-pointer bg-slate-900 rounded-3xl border border-white/10 shadow-2xl transition-all duration-700 hover:scale-[1.02]">
             <img 
               src={cat.image || `https://placehold.co/600x800/1e293b/ffffff?text=${cat.name}`} 
               alt={cat.name}
-              className="w-full h-full object-cover opacity-70 group-hover:scale-110 transition-transform duration-700"
+              className="w-full h-full object-cover opacity-60 group-hover:opacity-40 group-hover:scale-110 transition-all duration-1000"
             />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <h3 className="text-3xl font-bold text-white border-4 border-white px-6 py-3 uppercase tracking-widest group-hover:bg-white group-hover:text-slate-900 transition-colors">
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80" />
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
+              <div className="h-px w-12 bg-primary mb-6 group-hover:w-24 transition-all duration-500" />
+              <h3 className="text-4xl font-black text-white uppercase tracking-tighter leading-none mb-4 transform group-hover:-translate-y-2 transition-transform duration-500">
                 {cat.name}
               </h3>
+              <div className="text-primary text-sm font-bold tracking-[0.2em] uppercase opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                View Collection
+              </div>
             </div>
           </div>
         </Link>
@@ -112,40 +117,46 @@ export default function HomePage() {
       </section>
 
       {/* Features Grid */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div className="p-8 border border-slate-100 bg-slate-50/50 hover-elevate transition-shadow group rounded-md">
-              <div className="bg-primary/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                <ShieldCheck className="w-10 h-10 text-primary" />
+      <section className="py-32 bg-white relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-slate-50/50 -skew-x-12 translate-x-1/2 z-0" />
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+            <div className="p-10 bg-white border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 group rounded-3xl">
+              <div className="bg-slate-50 w-24 h-24 rounded-2xl flex items-center justify-center mx-auto mb-8 group-hover:scale-110 group-hover:bg-primary/5 transition-all duration-500">
+                <ShieldCheck className="w-12 h-12 text-primary" />
               </div>
-              <h3 className="text-xl font-bold mb-4">Certified Quality</h3>
-              <p className="text-slate-600">ISO 9001:2015 certified manufacturing process ensuring consistent top-tier quality standards for every batch.</p>
+              <h3 className="text-2xl font-black mb-4 tracking-tight">Certified Quality</h3>
+              <p className="text-slate-500 leading-relaxed font-medium">ISO 9001:2015 certified manufacturing process ensuring consistent top-tier quality standards for every batch.</p>
             </div>
-            <div className="p-8 border border-slate-100 bg-slate-50/50 hover-elevate transition-shadow group rounded-md">
-              <div className="bg-primary/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                <Truck className="w-10 h-10 text-primary" />
+            <div className="p-10 bg-white border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 group rounded-3xl transform md:-translate-y-8">
+              <div className="bg-slate-50 w-24 h-24 rounded-2xl flex items-center justify-center mx-auto mb-8 group-hover:scale-110 group-hover:bg-primary/5 transition-all duration-500">
+                <Truck className="w-12 h-12 text-primary" />
               </div>
-              <h3 className="text-xl font-bold mb-4">Fast Delivery</h3>
-              <p className="text-slate-600">Efficient logistics network with real-time tracking, ensuring timely delivery across the country in 2-5 business days.</p>
+              <h3 className="text-2xl font-black mb-4 tracking-tight">Fast Delivery</h3>
+              <p className="text-slate-500 leading-relaxed font-medium">Efficient logistics network with real-time tracking, ensuring timely delivery across the country in 2-5 business days.</p>
             </div>
-            <div className="p-8 border border-slate-100 bg-slate-50/50 hover-elevate transition-shadow group rounded-md">
-              <div className="bg-primary/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                <ThumbsUp className="w-10 h-10 text-primary" />
+            <div className="p-10 bg-white border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 group rounded-3xl">
+              <div className="bg-slate-50 w-24 h-24 rounded-2xl flex items-center justify-center mx-auto mb-8 group-hover:scale-110 group-hover:bg-primary/5 transition-all duration-500">
+                <ThumbsUp className="w-12 h-12 text-primary" />
               </div>
-              <h3 className="text-xl font-bold mb-4">Wholesale Pricing</h3>
-              <p className="text-slate-600">Direct-from-factory pricing tiers that scale with your volume, providing the best value and margins for your business.</p>
+              <h3 className="text-2xl font-black mb-4 tracking-tight">Wholesale Pricing</h3>
+              <p className="text-slate-500 leading-relaxed font-medium">Direct-from-factory pricing tiers that scale with your volume, providing the best value and margins for your business.</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Categories */}
-      <section className="py-24 bg-slate-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 text-slate-900 uppercase">Our Categories</h2>
-            <div className="h-1 w-20 bg-primary mx-auto" />
+      <section className="py-32 bg-slate-950 text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-primary/5 z-0" />
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+            <div className="max-w-xl">
+              <div className="text-primary text-xs font-black tracking-widest uppercase mb-4">Product Catalog</div>
+              <h2 className="text-5xl md:text-6xl font-black mb-6 tracking-tighter uppercase leading-[0.9]">Our Categories</h2>
+              <p className="text-slate-400 text-lg font-medium">Browse our extensive range of industrial packaging solutions designed for precision and durability.</p>
+            </div>
+            <div className="h-[2px] flex-1 bg-white/10 mx-12 hidden md:block mb-8" />
           </div>
           
           <CategoryList />
@@ -153,28 +164,28 @@ export default function HomePage() {
       </section>
 
       {/* Featured Products */}
-      <section className="py-24">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-between items-end mb-12">
+      <section className="py-32 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col md:flex-row justify-between items-baseline mb-16 gap-4">
             <div>
-              <h2 className="text-3xl font-bold mb-2 text-slate-900">FEATURED PRODUCTS</h2>
-              <div className="h-1 w-20 bg-primary" />
+              <div className="text-primary text-xs font-black tracking-widest uppercase mb-2">Curated Selection</div>
+              <h2 className="text-5xl font-black text-slate-900 tracking-tighter uppercase">Featured Products</h2>
             </div>
             <Link href="/products">
-              <Button variant="ghost" className="text-primary hover:text-primary/80">
-                View All <ArrowRight className="ml-2 h-4 w-4" />
+              <Button variant="ghost" className="text-primary hover:text-primary/80 text-lg font-bold group">
+                View Full Catalog <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
           </div>
 
           {isLoading ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="h-96 bg-slate-100 animate-pulse rounded-lg" />
+                <div key={i} className="h-96 bg-slate-100 animate-pulse rounded-3xl" />
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {featuredProducts?.slice(0, 4).map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}

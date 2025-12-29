@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import { type Product } from "@shared/schema";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Box } from "lucide-react";
 
 interface ProductCardProps {
@@ -13,38 +14,31 @@ export function ProductCard({ product }: ProductCardProps) {
 
   return (
     <Link href={`/products/${product.id}`}>
-      <Card className="group overflow-hidden cursor-pointer h-full hover:shadow-xl transition-all duration-300 border-slate-200 hover:border-primary/50">
-        <div className="aspect-[4/3] overflow-hidden bg-slate-100 relative">
-          {/* HTML Comment for Image: Product Thumbnail */}
-          <img 
-            src={mainImage} 
+      <Card className="overflow-hidden border-slate-100 hover:border-primary/20 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 group cursor-pointer rounded-3xl h-full flex flex-col">
+        <div className="relative aspect-[4/5] overflow-hidden bg-slate-50">
+          <img
+            src={mainImage}
             alt={product.name}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
           />
-          <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 text-xs font-semibold rounded-full uppercase tracking-wider text-primary shadow-sm">
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <Badge className="absolute top-4 right-4 bg-white/90 backdrop-blur text-slate-900 border-none shadow-sm font-bold px-3 py-1 rounded-full uppercase text-[10px] tracking-widest">
             {product.category}
-          </div>
+          </Badge>
         </div>
-        <CardContent className="p-6">
-          <h3 className="text-xl font-display font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors">
-            {product.name}
-          </h3>
-          <p className="text-sm text-slate-500 line-clamp-2 mb-4">
-            {product.description}
-          </p>
-          <div className="flex gap-2 flex-wrap">
-             {Object.entries(product.specs as Record<string, string>).slice(0, 2).map(([key, val]) => (
-               <div key={key} className="text-xs bg-slate-50 px-2 py-1 rounded border text-slate-600">
-                 <span className="font-semibold capitalize">{key}:</span> {val}
-               </div>
-             ))}
+        <CardContent className="p-8 flex-1 flex flex-col justify-between">
+          <div>
+            <h3 className="text-xl font-black text-slate-900 mb-3 tracking-tight group-hover:text-primary transition-colors line-clamp-2 uppercase leading-tight">
+              {product.name}
+            </h3>
+            <p className="text-slate-500 text-sm line-clamp-2 font-medium leading-relaxed mb-6">
+              {product.description}
+            </p>
           </div>
-        </CardContent>
-        <CardFooter className="p-6 pt-0 mt-auto">
-          <Button variant="ghost" className="w-full group-hover:bg-primary group-hover:text-white transition-all">
-            View Details <ArrowRight className="ml-2 h-4 w-4" />
+          <Button variant="outline" className="w-full border-slate-200 group-hover:border-primary group-hover:bg-primary group-hover:text-white transition-all duration-500 rounded-2xl h-12 font-bold uppercase tracking-widest text-xs">
+            View Details
           </Button>
-        </CardFooter>
+        </CardContent>
       </Card>
     </Link>
   );

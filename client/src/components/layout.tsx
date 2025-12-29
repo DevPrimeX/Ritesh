@@ -79,23 +79,24 @@ export function Navbar() {
 
 export function Footer() {
   return (
-    <footer className="bg-slate-900 text-slate-200 mt-24">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="space-y-4">
+    <footer className="bg-slate-950 text-slate-200 mt-24 border-t border-white/5 relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-primary/5 to-transparent pointer-events-none" />
+      <div className="container mx-auto px-6 py-20 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-16">
+          <div className="space-y-8">
             <div className="flex items-center space-x-2">
-              <span className="font-display text-2xl font-bold tracking-tight text-white uppercase">
+              <span className="font-sans text-3xl font-black tracking-tighter text-white uppercase">
                 Ritesh <span className="text-primary">Plastic</span>
               </span>
             </div>
-            <p className="text-sm text-slate-400">
-              Leading manufacturer of high-quality, durable, and sustainable products for the pharmaceutical industry.
+            <p className="text-lg text-slate-400 font-medium leading-relaxed">
+              Leading manufacturer of high-performance, precision-engineered plastic solutions for the pharmaceutical industry.
             </p>
           </div>
           
           <div>
-            <h4 className="text-white text-lg mb-4">Quick Links</h4>
-            <ul className="space-y-2 text-sm">
+            <h4 className="text-white text-xl font-black mb-8 tracking-tight uppercase">Quick Links</h4>
+            <ul className="space-y-4 text-slate-400 font-medium">
               <li><Link href="/products" className="hover:text-primary transition-colors">Our Products</Link></li>
               <li><Link href="/about" className="hover:text-primary transition-colors">About Us</Link></li>
               <li><Link href="/contact" className="hover:text-primary transition-colors">Contact Us</Link></li>
@@ -103,8 +104,8 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="text-white text-lg mb-4">Categories</h4>
-            <ul className="space-y-2 text-sm">
+            <h4 className="text-white text-xl font-black mb-8 tracking-tight uppercase">Categories</h4>
+            <ul className="space-y-4 text-slate-400 font-medium">
               <li><Link href="/products?category=Containers" className="hover:text-primary transition-colors">Plastic Containers</Link></li>
               <li><Link href="/products?category=Trays" className="hover:text-primary transition-colors">Serving Trays</Link></li>
               <li><Link href="/products?category=Foils" className="hover:text-primary transition-colors">Aluminum Foils</Link></li>
@@ -112,16 +113,25 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="text-white text-lg mb-4">Contact</h4>
-            <ul className="space-y-2 text-sm">
-              <li className="flex items-center"><Phone className="h-4 w-4 mr-2 text-primary" /> +91 98822 82826</li>
-              <li className="mt-2 text-slate-400">Industrial Area Lodhimajra, Baddi<br/>Himachal Pradesh, India</li>
+            <h4 className="text-white text-xl font-black mb-8 tracking-tight uppercase">Contact</h4>
+            <ul className="space-y-4 text-slate-400 font-medium">
+              <li className="flex items-center"><Phone className="h-5 w-5 mr-3 text-primary" /> +91 98822 82826</li>
+              <li className="flex items-start mt-4 leading-relaxed">
+                <div className="mt-1 mr-3 w-5 h-5 flex-shrink-0 bg-primary/20 rounded-full flex items-center justify-center">
+                  <div className="w-2 h-2 bg-primary rounded-full" />
+                </div>
+                Industrial Area Lodhimajra, Baddi<br/>Himachal Pradesh, India
+              </li>
             </ul>
           </div>
         </div>
         
-        <div className="border-t border-slate-800 mt-12 pt-8 text-center text-sm text-slate-500">
-          © {new Date().getFullYear()} Ritesh Plastic. All rights reserved.
+        <div className="border-t border-white/10 mt-20 pt-10 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-slate-500 font-bold tracking-widest uppercase">
+          <div>© {new Date().getFullYear()} Ritesh Plastic. All rights reserved.</div>
+          <div className="flex gap-8">
+            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+          </div>
         </div>
       </div>
     </footer>
