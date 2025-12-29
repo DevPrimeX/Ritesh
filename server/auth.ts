@@ -2,11 +2,14 @@ import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import { type Express } from "express";
 import session from "express-session";
+import connectPgSimple from "connect-pg-simple";
 import { scrypt, randomBytes, timingSafeEqual } from "crypto";
 import { promisify } from "util";
 import { storage } from "./storage";
+import { pool } from "./db";
 import { User } from "@shared/schema";
 
+const PostgresStore = connectPgSimple(session);
 const scryptAsync = promisify(scrypt);
 
 async function hashPassword(password: string) {
@@ -27,7 +30,13 @@ export function setupAuth(app: Express) {
     secret: process.env.SESSION_SECRET || "r3pl1t_s3cr3t_k3y",
     resave: false,
     saveUninitialized: false,
-    store: storage.sessionStore,
+    store: new PostgresStore({
+      pool,
+      createTableIfMissing: true,
+    }),
+    cookie: {
+      secure: app.get("env") === "production",
+    }
   };
 
   if (app.get("env") === "production") {
